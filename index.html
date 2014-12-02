@@ -1,0 +1,139 @@
+<DOCTYPE html>
+<html>
+<head>
+<title>TEST</title>
+<style>
+	body{
+		margin:0;
+		padding:0;
+		font-family: courier;
+
+	}
+	h1{
+		margin:1em 10%;
+		color: orangered;
+	}
+
+	h2{
+		margin:0;
+		padding:1em 10% 0;
+		border-top:1px solid black;
+	}
+
+	p{
+		margin:0;
+		padding:0 10% 1em;
+	}
+</style>
+</head>
+<body>
+<h1>Device Details</h1>
+<h2>Browser</h2>
+<p id="browser-type"></p>
+<h2>Screen Size</h2>
+<p id="screen"></p>
+<h2>Browser Size</h2>
+<p id="browser-size"></p>
+<h2>Operating System</h2>
+<p id="os"></p>
+<h2>Pixel Ratio</h2>
+<p id="pixel-ratio"></p>
+<h2>Javascript</h2>
+<p id="js">Disabled</p>
+
+<script>
+
+//OS
+var os_info = navigator.appVersion;
+var  os_start = os_info.indexOf(';')+1;
+var os_end = os_info.indexOf(')');
+var os_version = os_info.substring(os_start,os_end);
+// screen size
+var screen_width = window.screen.width;
+var screen_height = window.screen.height;
+//browser size
+var browser_height = window.innerHeight;
+var browser_width = window.innerWidth;
+//pixel ratio
+var pixel_ratio = window.devicePixelRatio;
+
+//strips OS_info for more specific text
+document.getElementById("screen").innerHTML = screen_width + "&times;" + screen_height;
+document.getElementById("browser-size").innerHTML = browser_width + "&times;" + browser_height;
+document.getElementById("os").innerHTML = os_version;
+document.getElementById("js").innerHTML = "Enabled";
+document.getElementById("pixel-ratio").innerHTML = pixel_ratio;
+
+</script>
+<script>
+
+// From http://www.javascripter.net/faq/browsern.htm
+
+var nVer = navigator.appVersion;
+var nAgt = navigator.userAgent;
+var browserName  = navigator.appName;
+var fullVersion  = ''+parseFloat(navigator.appVersion); 
+var majorVersion = parseInt(navigator.appVersion,10);
+var nameOffset,verOffset,ix;
+
+// In Opera 15+, the true version is after "OPR/" 
+if ((verOffset=nAgt.indexOf("OPR/"))!=-1) {
+ browserName = "Opera";
+ fullVersion = nAgt.substring(verOffset+4);
+}
+// In older Opera, the true version is after "Opera" or after "Version"
+else if ((verOffset=nAgt.indexOf("Opera"))!=-1) {
+ browserName = "Opera";
+ fullVersion = nAgt.substring(verOffset+6);
+ if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+   fullVersion = nAgt.substring(verOffset+8);
+}
+// In MSIE, the true version is after "MSIE" in userAgent
+else if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
+ browserName = "Microsoft Internet Explorer";
+ fullVersion = nAgt.substring(verOffset+5);
+}
+// In Chrome, the true version is after "Chrome" 
+else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
+ browserName = "Chrome";
+ fullVersion = nAgt.substring(verOffset+7);
+}
+// In Safari, the true version is after "Safari" or after "Version" 
+else if ((verOffset=nAgt.indexOf("Safari"))!=-1) {
+ browserName = "Safari";
+ fullVersion = nAgt.substring(verOffset+7);
+ if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+   fullVersion = nAgt.substring(verOffset+8);
+}
+// In Firefox, the true version is after "Firefox" 
+else if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+ browserName = "Firefox";
+ fullVersion = nAgt.substring(verOffset+8);
+}
+// In most other browsers, "name/version" is at the end of userAgent 
+else if ( (nameOffset=nAgt.lastIndexOf(' ')+1) < 
+          (verOffset=nAgt.lastIndexOf('/')) ) 
+{
+ browserName = nAgt.substring(nameOffset,verOffset);
+ fullVersion = nAgt.substring(verOffset+1);
+ if (browserName.toLowerCase()==browserName.toUpperCase()) {
+  browserName = navigator.appName;
+ }
+}
+// trim the fullVersion string at semicolon/space if present
+if ((ix=fullVersion.indexOf(";"))!=-1)
+   fullVersion=fullVersion.substring(0,ix);
+if ((ix=fullVersion.indexOf(" "))!=-1)
+   fullVersion=fullVersion.substring(0,ix);
+
+majorVersion = parseInt(''+fullVersion,10);
+if (isNaN(majorVersion)) {
+ fullVersion  = ''+parseFloat(navigator.appVersion); 
+ // majorVersion = parseInt(navigator.appVersion,10);
+}
+
+document.getElementById("browser-type").innerHTML = browserName + " " + fullVersion;
+
+</script>
+</body>
+</html>
