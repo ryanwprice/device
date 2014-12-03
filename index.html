@@ -7,7 +7,13 @@
 		margin:0;
 		padding:0;
 		font-family: courier;
+	}
 
+	@media all and (max-width: 600px){
+		body{
+			font-size:2em;
+			color:red;
+		}
 	}
 	h1{
 		margin:1em 10%;
@@ -27,6 +33,11 @@
 </style>
 </head>
 <body>
+
+<script type="text/javascript">
+    var is_touch_device = 'ontouchstart' in document.documentElement;
+    if(is_touch_device) alert("touch is enabled!");
+</script>
 <h1>Device Details</h1>
 <h2>Browser</h2>
 <p id="browser-type"></p>
@@ -132,7 +143,8 @@ if (isNaN(majorVersion)) {
  // majorVersion = parseInt(navigator.appVersion,10);
 }
 
-document.getElementById("browser-type").innerHTML = browserName + " " + fullVersion;
+//document.getElementById("browser-type").innerHTML = browserName + " " + fullVersion;
+document.getElementById("browser-type").innerHTML = nVer;
 
 </script>
 </body>
