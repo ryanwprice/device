@@ -1,6 +1,8 @@
-<DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0">
 <title>Device Checker</title>
 <style>
 	body{
@@ -30,6 +32,10 @@
 		margin:0;
 		padding:0 10% 1em;
 	}
+
+	.touch{
+		color: red;
+	}
 </style>
 </head>
 <body>
@@ -38,8 +44,15 @@
     var is_touch_device = 'ontouchstart' in document.documentElement;
     if(is_touch_device) alert("touch is enabled!");
 </script>
+
+<script>
+    document.documentElement.className += 
+    (("ontouchstart" in document.documentElement) ? ' touch' : ' no-touch');
+</script>
+
+
 <h1>Device Details</h1>
-<h2>Browser</h2>
+<h2 class="touch">Browser</h2>
 <p id="browser-type"></p>
 <h2>Screen Size</h2>
 <p id="screen"></p>
@@ -86,6 +99,12 @@ var browserName  = navigator.appName;
 var fullVersion  = ''+parseFloat(navigator.appVersion); 
 var majorVersion = parseInt(navigator.appVersion,10);
 var nameOffset,verOffset,ix;
+
+if(navigator.appVersion.match(/Chrome/i)){
+	console.log("CHROME");
+} else {
+	console.log(navigator.appVersion);
+};
 
 // In Opera 15+, the true version is after "OPR/" 
 if ((verOffset=nAgt.indexOf("OPR/"))!=-1) {

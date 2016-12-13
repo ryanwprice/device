@@ -13,5 +13,3 @@ I'm not fluent in JS, so this is dirt simple (with the exception of the code use
 - This is a one page file (HTML, CSS, & JS) to eliminate dependencies and requests.
 - The CSS is simple—just a few lines to make the markup more presentable.
 - The JS is simple, too—no jQuery or anything complicated.
-
-This 
